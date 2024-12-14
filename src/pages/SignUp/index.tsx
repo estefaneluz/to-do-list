@@ -3,11 +3,11 @@ import { InputWithLabel } from '@/components/Fields/InputWithLabel'
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router'
 
-const SignIn = () => {
+const SignUp = () => {
   const navigate = useNavigate()
 
-  const goToSignUp = () => {
-    navigate('/signup')
+  const goToSignIn = () => {
+    navigate('/signin')
   }
 
   return (
@@ -15,11 +15,17 @@ const SignIn = () => {
       <AppName />
 
       <div className="flex flex-col items-center gap-2">
-        <h2 className="text-3xl font-bold">Welcome back</h2>
-        <p className="text-gray-600">Please enter your details to sign in</p>
+        <h2 className="text-3xl font-bold">Sign Up</h2>
+        <p className="text-gray-600">Please enter your details to sign up</p>
       </div>
 
       <form className="flex w-full max-w-lg flex-col gap-6">
+        <InputWithLabel
+          label="Name"
+          type="text"
+          placeholder="Enter your name"
+        />
+
         <InputWithLabel
           label="Email"
           type="email"
@@ -29,20 +35,26 @@ const SignIn = () => {
         <InputWithLabel
           label="Password"
           type="password"
-          placeholder="Enter your password"
+          placeholder="Create your password"
         />
 
-        <Button className="h-12 text-base">Sign In</Button>
+        <InputWithLabel
+          label="Confirm Password"
+          type="password"
+          placeholder="Confirm your password"
+        />
+
+        <Button className="h-12 text-base">Sign Up</Button>
 
         <div className="flex items-center justify-center gap-1 text-sm">
-          <p>New user?</p>
+          <p>Already have an account?</p>
           <Button
             type="button"
             className="p-0 text-sm"
             variant="link"
-            onClick={goToSignUp}
+            onClick={goToSignIn}
           >
-            Create an account
+            Sign In
           </Button>
         </div>
       </form>
@@ -50,4 +62,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default SignUp
