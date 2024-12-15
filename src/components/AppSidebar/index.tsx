@@ -10,7 +10,7 @@ import { Button } from '../ui/button'
 
 export function AppSidebar() {
   return (
-    <Sidebar className="top-[--sidebar-top]">
+    <Sidebar className="top-[var(--header-height)]">
       <SidebarHeader>
         <User />
       </SidebarHeader>
