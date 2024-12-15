@@ -13,7 +13,7 @@ export function NewTaskModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button type="button" className="mr-auto">
+        <Button type="button">
           <Plus size={16} />
           New Task
         </Button>
