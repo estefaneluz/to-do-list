@@ -2,10 +2,11 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
   SidebarHeader
 } from '@/components/ui/sidebar'
 import { User } from './User'
+import Navbar from './Navbar'
+import { Button } from '../ui/button'
 
 export function AppSidebar() {
   return (
@@ -13,11 +14,12 @@ export function AppSidebar() {
       <SidebarHeader>
         <User />
       </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup />
-        <SidebarGroup />
+      <SidebarContent className="my-2">
+        <Navbar />
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <Button className="w-full">Logout</Button>
+      </SidebarFooter>
     </Sidebar>
   )
 }
