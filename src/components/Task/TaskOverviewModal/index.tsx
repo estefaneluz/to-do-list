@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge'
 import {
   Dialog,
   DialogContent,
@@ -6,9 +7,6 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 import { Task } from '@/types/task'
-import { Badge } from '@/components/ui/badge'
-import { DeleteTaskModal } from '../DeleteTaskModal'
-import { UpdateTaskModal } from '../UpdateTaskModal'
 
 type Props = {
   triggerClassName?: string
@@ -56,12 +54,6 @@ export function TaskOverviewModal({
               Personal
             </Badge>
           </div>
-        </div>
-        {/* <hr /> */}
-
-        <div className="ml-auto flex items-center gap-2">
-          <UpdateTaskModal task={task} />
-          <DeleteTaskModal taskDescription={task.description} />
         </div>
       </DialogContent>
     </Dialog>
