@@ -17,7 +17,10 @@ export function DeleteTaskModal({ taskDescription }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="px-3 text-gray-600" variant="ghost">
+        <Button
+          className="px-3 text-gray-600 hover:text-red-600"
+          variant="ghost"
+        >
           <Trash />
         </Button>
       </DialogTrigger>
