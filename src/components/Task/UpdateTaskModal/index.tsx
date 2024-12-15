@@ -1,5 +1,6 @@
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -68,13 +69,15 @@ export function UpdateTaskModal({ task }: Props) {
           />
 
           <div className="flex items-center justify-center gap-2">
-            <Button
-              variant="outline"
-              type="button"
-              className="h-10 w-full text-sm"
-            >
-              Cancel
-            </Button>
+            <DialogClose asChild>
+              <Button
+                variant="outline"
+                type="button"
+                className="h-10 w-full text-sm"
+              >
+                Cancel
+              </Button>
+            </DialogClose>
             <Button type="button" className="h-10 w-full text-sm">
               Update
             </Button>
