@@ -5,9 +5,9 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
 import { Plus } from 'lucide-react'
-import { InputWithLabel } from '../Fields/InputWithLabel'
+import { InputWithLabel } from '../../Fields/InputWithLabel'
 
 export function NewTaskModal() {
   return (

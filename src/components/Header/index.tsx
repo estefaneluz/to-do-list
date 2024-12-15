@@ -1,6 +1,6 @@
 import { AppName } from '../AppName'
 import { Input } from '../ui/input'
-import { NewTaskModal } from '../NewTaskModal'
+import { NewTaskModal } from '../Task/NewTaskModal'
 
 export function Header() {
   return (
