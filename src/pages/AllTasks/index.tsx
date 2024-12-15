@@ -2,6 +2,8 @@ import { Badge } from '@/components/ui/badge'
 import { Task } from './Task'
 import { Pagination } from './Pagination'
 import { NewTagModal } from './NewTagModal'
+import { Input } from '../../components/ui/input'
+import { Button } from '../../components/ui/button'
 
 const AllTasks = () => {
   return (
@@ -16,6 +18,16 @@ const AllTasks = () => {
 
           <NewTagModal />
         </div>
+      </div>
+      <div className="flex gap-2">
+        <Input
+          type="text"
+          placeholder="Search tasks..."
+          className="bg-white py-5"
+        />
+        <Button type="submit" className="h-auto">
+          Search
+        </Button>
       </div>
       <div className="flex flex-col gap-4">
         <Task />
