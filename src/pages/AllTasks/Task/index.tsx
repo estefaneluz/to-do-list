@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
-import { DeleteTaskModal } from './DeleteTaskModal'
-import { UpdateTaskModal } from './UpdateTaskModal'
+import { DeleteTaskModal } from '../../../components/Task/DeleteTaskModal'
+import { UpdateTaskModal } from '../../../components/Task/UpdateTaskModal'
 import { TaskOverviewModal } from '@/components/Task/TaskOverviewModal'
 import { Button } from '@/components/ui/button'
 
