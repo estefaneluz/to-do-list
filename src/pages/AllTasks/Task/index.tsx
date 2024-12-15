@@ -1,8 +1,7 @@
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Pencil } from 'lucide-react'
 import { DeleteTaskModal } from './DeleteTaskModal'
+import { UpdateTaskModal } from './UpdateTaskModal'
 
 export function Task() {
   const taskDescription = 'Update website content'
@@ -15,9 +14,17 @@ export function Task() {
       <Badge className="mr-2">Work</Badge>
 
       <div className=" flex items-center gap-1">
-        <Button className="px-3 text-gray-600" variant="ghost">
-          <Pencil />
-        </Button>
+        <UpdateTaskModal
+          task={{
+            description: taskDescription,
+            tags: [],
+            done: false,
+            id: '1',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            createdBy: 'Estéfane Côrtes'
+          }}
+        />
         <DeleteTaskModal taskDescription={taskDescription} />
       </div>
     </div>
