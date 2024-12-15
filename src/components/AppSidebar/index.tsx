@@ -7,6 +7,7 @@ import {
 import { User } from './User'
 import Navbar from './Navbar'
 import { Button } from '../ui/button'
+import { LogOut } from 'lucide-react'
 
 export function AppSidebar() {
   return (
@@ -18,7 +19,10 @@ export function AppSidebar() {
         <Navbar />
       </SidebarContent>
       <SidebarFooter>
-        <Button className="w-full">Logout</Button>
+        <Button variant="outline" className="w-full">
+          <LogOut size={16} />
+          Logout
+        </Button>
       </SidebarFooter>
     </Sidebar>
   )

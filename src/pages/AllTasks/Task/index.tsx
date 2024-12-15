@@ -1,13 +1,16 @@
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Pencil, Trash } from 'lucide-react'
+import { Pencil } from 'lucide-react'
+import { DeleteTaskModal } from './DeleteTaskModal'
 
 export function Task() {
+  const taskDescription = 'Update website content'
+
   return (
     <div className="flex items-center gap-2 rounded-sm border bg-white p-4">
       <Checkbox />
-      <p className="grow">Update website content</p>
+      <p className="grow">{taskDescription}</p>
 
       <Badge className="mr-2">Work</Badge>
 
@@ -15,9 +18,7 @@ export function Task() {
         <Button className="px-3 text-gray-600" variant="ghost">
           <Pencil />
         </Button>
-        <Button className="px-3 text-gray-600" variant="ghost">
-          <Trash />
-        </Button>
+        <DeleteTaskModal taskDescription={taskDescription} />
       </div>
     </div>
   )
