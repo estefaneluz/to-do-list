@@ -1,20 +1,18 @@
+import { TaskOverviewModal } from '@/components/Task/TaskOverviewModal'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import { DeleteTaskModal } from '../../../components/Task/DeleteTaskModal'
 import { UpdateTaskModal } from '../../../components/Task/UpdateTaskModal'
-import { TaskOverviewModal } from '@/components/Task/TaskOverviewModal'
-import { Button } from '@/components/ui/button'
 
 export function Task() {
   const taskDescription = 'Update website content'
 
   return (
-    <div className="flex items-center gap-2 rounded-sm border bg-white p-4">
+    <div className="flex cursor-pointer items-center gap-2 rounded-sm border bg-white p-4">
       <Checkbox />
 
       <TaskOverviewModal
         triggerClassName="grow"
-        asChild
         task={{
           description: taskDescription,
           tags: [],
@@ -25,17 +23,18 @@ export function Task() {
           createdBy: 'Estéfane Côrtes'
         }}
       >
-        <Button
-          className="justify-start px-2 text-base font-normal text-accent-foreground"
-          variant="link"
-        >
+        <div className="flex items-center">
           {taskDescription}
-        </Button>
+          <Badge
+            className="ml-2 size-max border-primary bg-primary-foreground text-primary"
+            variant="outline"
+          >
+            Work
+          </Badge>
+        </div>
       </TaskOverviewModal>
 
-      <Badge className="mr-2">Work</Badge>
-
-      <div className=" flex items-center gap-1">
+      <div className=" flex items-center gap-2">
         <UpdateTaskModal
           task={{
             description: taskDescription,
