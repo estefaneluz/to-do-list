@@ -31,8 +31,8 @@ export function NewTaskModal() {
             placeholder="Describe your task"
           />
 
-          <Button type="button" className="h-12 text-base">
-            Criar
+          <Button type="button" className="h-10 w-full text-sm">
+            Create
           </Button>
         </form>
       </DialogContent>

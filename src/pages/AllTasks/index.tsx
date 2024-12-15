@@ -1,9 +1,7 @@
-import clsx from 'clsx'
-import { Badge, badgeVariants } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Plus } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
 import { Task } from './Task'
 import { Pagination } from './Pagination'
+import { NewTagModal } from './NewTagModal'
 
 const AllTasks = () => {
   return (
@@ -16,15 +14,7 @@ const AllTasks = () => {
             Personal
           </Badge>
 
-          <Button
-            variant="secondary"
-            className={clsx(
-              badgeVariants({ variant: 'outline' }),
-              'font-normal'
-            )}
-          >
-            <Plus size={12} /> Add Tag
-          </Button>
+          <NewTagModal />
         </div>
       </div>
       <div className="flex flex-col gap-4">
