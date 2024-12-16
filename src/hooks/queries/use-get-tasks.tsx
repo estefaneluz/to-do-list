@@ -10,7 +10,10 @@ type Filters = {
 
 async function getAllTasks(params: Filters): Promise<TaskList> {
   const { data } = await client.get('/tasks/', {
-    params
+    params,
+    paramsSerializer: {
+      indexes: null
+    }
   })
 
   return data
@@ -18,7 +21,7 @@ async function getAllTasks(params: Filters): Promise<TaskList> {
 
 export function useGetTasks({ search, tags, page }: Filters) {
   return useQuery({
-    queryKey: ['ALL_TASKS'],
+    queryKey: ['ALL_TASKS', search, tags],
     queryFn: () => getAllTasks({ search, tags, page }),
     enabled: !!page
   })

@@ -11,17 +11,26 @@ import { useGetTags } from '@/hooks/queries/use-get-tags'
 const AllTasks = () => {
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
+  const [filteredTags, setFilteredTags] = useState<number[]>([])
 
   const {
     data: tasks,
     isLoading: tasksLoading,
     refetch: refetchTasks
-  } = useGetTasks({ search, page })
+  } = useGetTasks({ search, page, tags: filteredTags })
 
   const { data: tags } = useGetTags()
 
   const handlePageChange = (page: number) => {
     setPage(page)
+  }
+
+  const handleSelectTag = (tagId: number) => {
+    if (filteredTags.includes(tagId)) {
+      setFilteredTags(filteredTags.filter((id) => id !== tagId))
+    } else {
+      setFilteredTags([...filteredTags, tagId])
+    }
   }
 
   const rangeItems = (() => {
@@ -38,10 +47,23 @@ const AllTasks = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <h2 className="text-xl font-medium">All Tasks</h2>
-        <div className="flex gap-2">
-          {tags && tags?.map((tag) => <Badge key={tag.id}>{tag.name}</Badge>)}
+        <div className="flex flex-wrap gap-2">
+          {tags &&
+            tags?.map((tag) => {
+              const isSelected = filteredTags.includes(tag.id)
+              return (
+                <Badge
+                  onClick={() => handleSelectTag(tag.id)}
+                  className="cursor-pointer"
+                  variant={isSelected ? 'default' : 'outline'}
+                  key={tag.id}
+                >
+                  {tag.name}
+                </Badge>
+              )
+            })}
 
           <NewTagModal />
         </div>

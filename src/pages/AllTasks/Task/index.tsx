@@ -17,12 +17,15 @@ export function Task({ data }: TaskProps) {
       <TaskOverviewModal triggerClassName="grow" task={data}>
         <div className="flex items-center">
           {data.title}
-          <Badge
-            className="ml-2 size-max border-primary bg-primary-foreground text-primary"
-            variant="outline"
-          >
-            Work
-          </Badge>
+          {data.tags.map((tag) => (
+            <Badge
+              key={tag.id}
+              className="ml-2 size-max border-primary bg-primary-foreground text-primary"
+              variant="outline"
+            >
+              {tag.name}
+            </Badge>
+          ))}
         </div>
       </TaskOverviewModal>
 

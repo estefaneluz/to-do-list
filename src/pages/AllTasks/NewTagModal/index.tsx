@@ -59,7 +59,10 @@ export function NewTagModal() {
       <DialogTrigger asChild>
         <Button
           variant="secondary"
-          className={clsx(badgeVariants({ variant: 'outline' }), 'font-normal')}
+          className={clsx(
+            badgeVariants({ variant: 'outline' }),
+            'ml-auto font-normal'
+          )}
         >
           <Plus size={12} /> Add Tag
         </Button>

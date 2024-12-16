@@ -7,6 +7,7 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 import { Task } from '@/types/task'
+import clsx from 'clsx'
 
 type Props = {
   triggerClassName?: string
@@ -34,27 +35,35 @@ export function TaskOverviewModal({
 
         <div className="flex items-center gap-4 text-sm">
           <p className="w-20 text-gray-600">Created By</p>
-          <p>{task.createdBy}</p>
+          <p>{task.created_by}</p>
         </div>
 
         <div className="flex items-center gap-4 text-sm">
           <p className="w-20 text-gray-600">Status</p>
           <div className="flex items-center gap-2">
-            <div className="size-2 rounded-full bg-orange-600"></div>
+            <div
+              className={clsx('size-2 rounded-full', {
+                'bg-orange-600': task.status.toLowerCase() === 'pending',
+                'bg-green-600': task.status.toLowerCase() === 'done'
+              })}
+            ></div>
             <p>{task.status}</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 text-sm">
-          <p className="w-20 text-gray-600">Tags</p>
+        {task.tags.length > 0 && (
+          <div className="flex items-center gap-4 text-sm">
+            <p className="w-20 text-gray-600">Tags</p>
 
-          <div className="flex items-center gap-2">
-            <Badge className="max-w-max">Work</Badge>
-            <Badge className="max-w-max bg-emerald-500 hover:bg-emerald-500/80">
-              Personal
-            </Badge>
+            <div className="flex items-center gap-2">
+              {task.tags.map((tag) => (
+                <Badge key={tag.id} className="max-w-max">
+                  {tag.name}
+                </Badge>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </DialogContent>
     </Dialog>
   )

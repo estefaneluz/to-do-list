@@ -5,9 +5,9 @@ export type Task = {
   title: string
   status: 'pending' | 'done'
   tags: Tag[]
-  createdAt: Date
-  updatedAt: Date
-  createdBy: string
+  created_at: Date
+  updated_at: Date
+  created_by: string
 }
 
 export type TaskList = {
