@@ -2,6 +2,7 @@ import client from '@/api/clients'
 import { Task } from '@/types/task'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from '../use-toast'
+import { TaskStatus } from '@/enum/task-status'
 
 type CreateTask = {
   title: string
@@ -23,6 +24,61 @@ export const useCreateTask = () => {
         title: 'Success!',
         description: 'You have successfully created a task.'
       })
+    },
+    onError: () => {
+      toast({
+        title: 'Error!',
+        description: 'Something went wrong.',
+        variant: 'destructive'
+      })
+    }
+  })
+}
+
+type UpdateStatus = {
+  id: number
+  status: TaskStatus
+}
+
+async function updateStatus({ id, status }: UpdateStatus): Promise<Task> {
+  const { data } = await client.patch(`/tasks/${id}/`, {
+    status
+  })
+  return data
+}
+
+export const useUpdateStatus = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: updateStatus,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ALL_TASKS'] })
+    },
+    onError: () => {
+      toast({
+        title: 'Error!',
+        description: 'Something went wrong.',
+        variant: 'destructive'
+      })
+    }
+  })
+}
+
+async function updateTask(params: Task): Promise<Task> {
+  const { data } = await client.patch(`/tasks/${params.id}/`, {
+    params
+  })
+  return data
+}
+
+export const useUpdateTask = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: updateTask,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ALL_TASKS'] })
     },
     onError: () => {
       toast({

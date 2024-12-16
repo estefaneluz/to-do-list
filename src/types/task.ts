@@ -1,9 +1,10 @@
+import { TaskStatus } from '@/enum/task-status'
 import { Tag } from './tag'
 
 export type Task = {
   id: number
   title: string
-  status: 'pending' | 'done'
+  status: TaskStatus
   tags: Tag[]
   created_at: Date
   updated_at: Date

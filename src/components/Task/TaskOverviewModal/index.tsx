@@ -6,6 +6,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
+import { TaskStatus } from '@/enum/task-status'
 import { Task } from '@/types/task'
 import clsx from 'clsx'
 
@@ -43,8 +44,8 @@ export function TaskOverviewModal({
           <div className="flex items-center gap-2">
             <div
               className={clsx('size-2 rounded-full', {
-                'bg-orange-600': task.status.toLowerCase() === 'pending',
-                'bg-green-600': task.status.toLowerCase() === 'done'
+                'bg-orange-600': task.status === TaskStatus.PENDING,
+                'bg-green-600': task.status === TaskStatus.DONE
               })}
             ></div>
             <p>{task.status}</p>
