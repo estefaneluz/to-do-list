@@ -27,9 +27,11 @@ const AllTasks = () => {
   const rangeItems = (() => {
     const pageSize = tasks?.page_size ?? 0
     const currentPage = tasks?.current_page ?? page
+    const totalItems = tasks?.total_items ?? 0
 
     const itemsStart = (currentPage - 1) * pageSize + 1
-    const itemsEnd = currentPage * pageSize
+    let itemsEnd = currentPage * pageSize
+    itemsEnd = itemsEnd > totalItems ? totalItems : itemsEnd
 
     return `${itemsStart}-${itemsEnd}`
   })()
