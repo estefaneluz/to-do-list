@@ -16,7 +16,9 @@ export const Select = ({ label, ...props }: Props) => {
           container: ({ isFocused }) =>
             clsx(
               'rounded-md border border-input bg-transparent px-3 text-sm shadow-sm transition-colors',
-              isFocused ? 'outline-none ring-1 ring-ring' : ''
+              {
+                'outline-none ring-1 ring-ring': isFocused
+              }
             ),
           option: () => clsx('p-2 hover:bg-secondary'),
           menu: () => clsx('-ml-2 mt-2 rounded-md border bg-white'),
