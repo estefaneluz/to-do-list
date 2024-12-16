@@ -1,5 +1,7 @@
 export type Module = 'all-tasks' | 'tags' | 'settings'
 import AllTasks from '@/pages/AllTasks'
+import SignIn from '@/pages/SignIn'
+import SignUp from '@/pages/SignUp'
 import { ListCheck, Settings, Tag } from 'lucide-react'
 
 type Route = {
@@ -38,3 +40,16 @@ export const PROTECTED_ROUTES = {
     element: <></>
   }
 } as Routes
+
+export const PUBLIC_ROUTES = {
+  signin: {
+    path: '/signin',
+    name: 'Sign In',
+    element: <SignIn />
+  },
+  signup: {
+    path: '/signup',
+    name: 'Sign Up',
+    element: <SignUp />
+  }
+}

@@ -1,8 +1,26 @@
-import SignIn from '@/pages/SignIn'
-import SignUp from '@/pages/SignUp'
-import { Route, Routes } from 'react-router-dom'
-import { PROTECTED_ROUTES } from './routes'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { PROTECTED_ROUTES, PUBLIC_ROUTES } from './routes'
 import Layout from '@/pages/layout'
+import { useAuth } from '@/hooks/contexts/use-auth-context'
+import { useEffect } from 'react'
+
+export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+  const { user } = useAuth()
+  if (!user?.token) {
+    return <Navigate to="/signin" />
+  }
+  return children
+}
+
+export const PublicRoute = ({ children }: { children: JSX.Element }) => {
+  const { signOut } = useAuth()
+
+  useEffect(() => {
+    signOut()
+  }, [signOut])
+
+  return children
+}
 
 const Router = () => {
   return (
@@ -11,11 +29,23 @@ const Router = () => {
         <Route
           key={route.path}
           path={route.path}
-          element={<Layout>{route.element}</Layout>}
+          element={
+            <ProtectedRoute>
+              <Layout>{route.element}</Layout>
+            </ProtectedRoute>
+          }
         />
       ))}
-      <Route path="/signin" element={<SignIn />} />
-      <Route path="/signup" element={<SignUp />} />
+
+      {Object.values(PUBLIC_ROUTES).map((route) => (
+        <Route
+          key={route.path}
+          path={route.path}
+          element={<PublicRoute>{route.element}</PublicRoute>}
+        />
+      ))}
+
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )
 }

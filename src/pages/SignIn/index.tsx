@@ -8,6 +8,7 @@ import { Form } from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useSignIn } from '@/hooks/queries/use-authentication'
+import { useAuth } from '@/hooks/contexts/use-auth-context'
 
 const SignIn = () => {
   const LoginUser = yup.object({
@@ -19,21 +20,36 @@ const SignIn = () => {
     resolver: yupResolver(LoginUser)
   })
 
-  const { mutate: signIn } = useSignIn()
+  const { mutateAsync: signInMutate } = useSignIn()
 
   const navigate = useNavigate()
+  const { signIn } = useAuth()
 
   const goToSignUp = () => {
     navigate('/signup')
   }
 
   const onSubmit = (data: yup.InferType<typeof LoginUser>) => {
-    signIn({
-      payload: {
-        email: data.email,
-        password: data.password
+    signInMutate(
+      {
+        payload: {
+          email: data.email,
+          password: data.password
+        }
+      },
+      {
+        onSuccess(data) {
+          console.log(data)
+          signIn(data)
+          console.log('??')
+        },
+        onError() {
+          form.setError('password', {
+            message: 'Invalid email or password'
+          })
+        }
       }
-    })
+    )
   }
 
   return (
@@ -63,7 +79,9 @@ const SignIn = () => {
             placeholder="Enter your password"
           />
 
-          <Button className="h-12 text-base">Sign In</Button>
+          <Button type="submit" className="h-12 text-base">
+            Sign In
+          </Button>
 
           <div className="flex items-center justify-center gap-1 text-sm">
             <p>New user?</p>

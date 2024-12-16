@@ -27,7 +27,6 @@ const SignUp = () => {
   })
 
   const { mutate: signUp } = useSignUp()
-
   const navigate = useNavigate()
   const { toast } = useToast()
 

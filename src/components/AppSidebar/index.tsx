@@ -8,8 +8,11 @@ import { User } from './User'
 import Navbar from './Navbar'
 import { Button } from '../ui/button'
 import { LogOut } from 'lucide-react'
+import { useAuth } from '@/hooks/contexts/use-auth-context'
 
 export function AppSidebar() {
+  const { signOut } = useAuth()
+
   return (
     <Sidebar className="top-[var(--header-height)]">
       <SidebarHeader>
@@ -19,9 +22,9 @@ export function AppSidebar() {
         <Navbar />
       </SidebarContent>
       <SidebarFooter>
-        <Button variant="outline" className="w-full">
+        <Button variant="outline" className="w-full" onClick={signOut}>
           <LogOut size={16} />
-          Logout
+          Sign Out
         </Button>
       </SidebarFooter>
     </Sidebar>
