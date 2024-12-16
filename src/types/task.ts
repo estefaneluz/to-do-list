@@ -2,8 +2,8 @@ import { Tag } from './tag'
 
 export type Task = {
   id: string
-  description: string
-  done: boolean
+  title: string
+  status: 'pending' | 'done'
   tags: Tag[]
   createdAt: Date
   updatedAt: Date

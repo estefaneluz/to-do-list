@@ -29,7 +29,7 @@ export function TaskOverviewModal({
 
       <DialogContent className="gap-4">
         <DialogHeader className="mb-2">
-          <DialogTitle>{task.description}</DialogTitle>
+          <DialogTitle>{task.title}</DialogTitle>
         </DialogHeader>
 
         <div className="flex items-center gap-4 text-sm">
@@ -41,7 +41,7 @@ export function TaskOverviewModal({
           <p className="w-20 text-gray-600">Status</p>
           <div className="flex items-center gap-2">
             <div className="size-2 rounded-full bg-orange-600"></div>
-            <p>Pending</p>
+            <p>{task.status}</p>
           </div>
         </div>
 

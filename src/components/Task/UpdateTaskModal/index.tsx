@@ -34,7 +34,7 @@ export function UpdateTaskModal({ task }: Props) {
           <InputWithLabel
             label="Description"
             type="text"
-            defaultValue={task.description}
+            defaultValue={task.title}
           />
 
           <Select
