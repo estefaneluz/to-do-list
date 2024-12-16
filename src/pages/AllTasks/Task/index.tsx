@@ -28,7 +28,7 @@ export function Task({ data }: TaskProps) {
 
       <div className=" flex items-center gap-2">
         <UpdateTaskModal task={data} />
-        <DeleteTaskModal taskDescription={data.title} />
+        <DeleteTaskModal task={data} />
       </div>
     </div>
   )

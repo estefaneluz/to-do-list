@@ -33,3 +33,30 @@ export const useCreateTask = () => {
     }
   })
 }
+
+type DeleteTask = {
+  id: number
+}
+
+async function deleteTask({ id }: DeleteTask): Promise<Task> {
+  const { data } = await client.delete(`/tasks/${id}/`)
+  return data
+}
+
+export const useDeleteTask = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: deleteTask,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['ALL_TASKS'] })
+    },
+    onError: () => {
+      toast({
+        title: 'Error!',
+        description: 'Something went wrong.',
+        variant: 'destructive'
+      })
+    }
+  })
+}
