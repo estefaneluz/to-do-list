@@ -86,6 +86,7 @@ export function NewTagModal() {
               name="name"
               type="text"
               placeholder="Describe your tag"
+              control={form.control}
             />
 
             <ControlledInput
@@ -94,6 +95,7 @@ export function NewTagModal() {
               label="Color"
               type="color"
               placeholder="Describe your tag"
+              control={form.control}
             />
 
             <Button

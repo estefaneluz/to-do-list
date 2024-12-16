@@ -65,10 +65,18 @@ export const useUpdateStatus = () => {
   })
 }
 
-async function updateTask(params: Task): Promise<Task> {
-  const { data } = await client.patch(`/tasks/${params.id}/`, {
-    params
-  })
+type UpdateTask = {
+  id: number
+  title: string
+  status: TaskStatus
+  tags: number[]
+}
+
+async function updateTask(payload: UpdateTask): Promise<Task> {
+  const { data } = await client.put(
+    `/tasks/${payload.id}/update_task/`,
+    payload
+  )
   return data
 }
 
@@ -79,6 +87,10 @@ export const useUpdateTask = () => {
     mutationFn: updateTask,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['ALL_TASKS'] })
+      toast({
+        title: 'Success!',
+        description: 'You have successfully updated a task.'
+      })
     },
     onError: () => {
       toast({

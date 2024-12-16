@@ -8,17 +8,91 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Pencil } from 'lucide-react'
-import { InputWithLabel } from '@/components/Fields/InputWithLabel'
 import { Task } from '@/types/task'
-import { Select } from '@/components/Fields/Select'
+import { TaskStatus } from '@/enum/task-status'
+import { Form } from '@/components/ui/form'
+import yup from '@/api/yup'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useUpdateTask } from '@/hooks/queries/use-task'
+import { ControlledInput } from '@/components/Fields/ControlledInput'
+import { useGetTags } from '@/hooks/queries/use-get-tags'
+import ControlledSelect from '@/components/Fields/ControlledSelect'
+import { useEffect, useState } from 'react'
 
 type Props = {
   task: Task
 }
 
 export function UpdateTaskModal({ task }: Props) {
+  const [open, setOpen] = useState(false)
+
+  const UpdateTask = yup.object({
+    title: yup.string().required(),
+    status: yup
+      .object({
+        value: yup.string().required(),
+        label: yup.string().required()
+      })
+      .required(),
+    tags: yup.array()
+  })
+
+  const { mutate: updateTask, isPending: isUpdating } = useUpdateTask()
+  const { data: tags, isLoading: tagsLoading } = useGetTags()
+
+  const tags_options =
+    tags?.map((tag) => ({
+      label: tag.name,
+      value: tag.id
+    })) ?? []
+
+  const status_options = Object.values(TaskStatus).map((status) => ({
+    label: status,
+    value: status
+  }))
+
+  const defaultValues = {
+    title: task.title,
+    status:
+      status_options.find((status) => status.value === task.status) ??
+      status_options[0],
+    tags:
+      task.tags.map((tag) => ({
+        label: tag.name,
+        value: tag.id
+      })) ?? []
+  }
+
+  const form = useForm({
+    resolver: yupResolver(UpdateTask),
+    defaultValues
+  })
+
+  const onSubmit = (data: yup.InferType<typeof UpdateTask>) => {
+    updateTask(
+      {
+        id: task.id,
+        title: data.title,
+        status: data.status?.value as TaskStatus,
+        tags: data?.tags?.map((tag) => tag.value) ?? []
+      },
+      {
+        onSuccess: () => {
+          setOpen(false)
+        }
+      }
+    )
+  }
+
+  useEffect(() => {
+    if (!open) {
+      form.reset()
+    }
+  }, [form, open])
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="px-3 text-gray-600" variant="ghost">
           <Pencil />
@@ -30,59 +104,60 @@ export function UpdateTaskModal({ task }: Props) {
           <DialogTitle>Update Task</DialogTitle>
         </DialogHeader>
 
-        <form className="flex w-full max-w-lg flex-col gap-5">
-          <InputWithLabel
-            label="Description"
-            type="text"
-            defaultValue={task.title}
-          />
+        <Form {...form}>
+          <form
+            className="flex w-full max-w-lg flex-col gap-5"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
+            <ControlledInput
+              label="Title"
+              name="title"
+              type="text"
+              defaultValue={task.title}
+              control={form.control}
+            />
 
-          <Select
-            label="Status"
-            defaultValue={{
-              label: 'Pending',
-              value: 'false'
-            }}
-            options={[
-              {
-                label: 'Done',
-                value: 'true'
-              },
-              {
-                label: 'Pending',
-                value: 'false'
-              }
-            ]}
-          />
+            <ControlledSelect
+              label="Status"
+              name="status"
+              defaultValue={status_options.find(
+                (option) => option.value === task.status
+              )}
+              options={status_options}
+              control={form.control}
+            />
 
-          <Select
-            label="Tags"
-            closeMenuOnSelect={false}
-            isMulti
-            isClearable
-            options={[
-              {
-                label: 'Work',
-                value: 'work'
-              }
-            ]}
-          />
+            <ControlledSelect
+              label="Tags"
+              name="tags"
+              closeMenuOnSelect={false}
+              isMulti
+              isClearable
+              isLoading={tagsLoading}
+              options={tags_options}
+              control={form.control}
+            />
 
-          <div className="flex items-center justify-center gap-2">
-            <DialogClose asChild>
+            <div className="flex items-center justify-center gap-2">
+              <DialogClose asChild>
+                <Button
+                  variant="outline"
+                  type="button"
+                  className="h-10 w-full text-sm"
+                >
+                  Cancel
+                </Button>
+              </DialogClose>
               <Button
-                variant="outline"
-                type="button"
+                disabled={isUpdating}
+                type="submit"
                 className="h-10 w-full text-sm"
               >
-                Cancel
+                Update
               </Button>
-            </DialogClose>
-            <Button type="button" className="h-10 w-full text-sm">
-              Update
-            </Button>
-          </div>
-        </form>
+            </div>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   )
