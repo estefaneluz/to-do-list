@@ -8,6 +8,8 @@ import { ControlledInput } from '@/components/Fields/ControlledInput'
 import { AppName } from '@/components/AppName'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
+import { AxiosError } from 'axios'
+import { useToast } from '@/hooks/use-toast'
 
 const SignUp = () => {
   const RegisterUser = yup.object({
@@ -27,19 +29,41 @@ const SignUp = () => {
   const { mutate: signUp } = useSignUp()
 
   const navigate = useNavigate()
+  const { toast } = useToast()
 
   const goToSignIn = () => {
     navigate('/signin')
   }
 
   const onSubmit = (data: yup.InferType<typeof RegisterUser>) => {
-    signUp({
-      payload: {
-        name: data.name,
-        email: data.email,
-        password: data.password
+    signUp(
+      {
+        payload: {
+          name: data.name,
+          email: data.email,
+          password: data.password
+        }
+      },
+      {
+        onSuccess() {
+          toast({
+            title: 'Success!',
+            description: 'You have successfully registered.'
+          })
+
+          goToSignIn()
+        },
+        onError(error) {
+          if (error instanceof AxiosError) {
+            Object.entries(error.response?.data).forEach(([key, value]) => {
+              form.setError(key as 'email' | 'password' | 'name', {
+                message: value as string
+              })
+            })
+          }
+        }
       }
-    })
+    )
   }
 
   return (
@@ -87,7 +111,9 @@ const SignUp = () => {
             control={form.control}
           />
 
-          <Button className="h-12 text-base">Sign Up</Button>
+          <Button type="submit" className="h-12 text-base">
+            Sign Up
+          </Button>
 
           <div className="flex items-center justify-center gap-1 text-sm">
             <p>Already have an account?</p>
