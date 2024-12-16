@@ -5,19 +5,34 @@ import { NewTagModal } from './NewTagModal'
 import { Input } from '../../components/ui/input'
 import { Button } from '../../components/ui/button'
 import { useGetTasks } from '../../hooks/queries/use-get-tasks'
+import { useState } from 'react'
+import { useGetTags } from '@/hooks/queries/use-get-tags'
 
 const AllTasks = () => {
-  const { data, isLoading } = useGetTasks()
+  const [page, setPage] = useState(1)
+  const { data: tasks, isLoading: tasksLoading } = useGetTasks({ page })
+  const { data: tags } = useGetTags()
+
+  const handlePageChange = (page: number) => {
+    setPage(page)
+  }
+
+  const rangeItems = (() => {
+    const pageSize = tasks?.page_size ?? 0
+    const currentPage = tasks?.current_page ?? page
+
+    const itemsStart = (currentPage - 1) * pageSize + 1
+    const itemsEnd = currentPage * pageSize
+
+    return `${itemsStart}-${itemsEnd}`
+  })()
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between gap-4">
         <h2 className="text-xl font-medium">All Tasks</h2>
         <div className="flex gap-2">
-          <Badge>Work</Badge>
-          <Badge className="bg-emerald-500 hover:bg-emerald-500/80">
-            Personal
-          </Badge>
+          {tags && tags?.map((tag) => <Badge key={tag.id}>{tag.name}</Badge>)}
 
           <NewTagModal />
         </div>
@@ -33,15 +48,26 @@ const AllTasks = () => {
         </Button>
       </div>
       <div className="flex flex-col gap-4">
-        {isLoading ? (
+        {tasksLoading ? (
           <h1> Loading... </h1>
+        ) : tasks ? (
+          <>
+            {tasks?.results?.map((task) => <Task key={task.id} data={task} />)}
+
+            <div className="flex items-center justify-between gap-4 text-xs text-gray-600">
+              <p className="min-w-max">
+                Showing {rangeItems} of {tasks?.total_items ?? 0} tasks
+              </p>
+              <Pagination
+                pageCount={tasks?.total_pages || 1}
+                page={tasks?.current_page || 1}
+                onPageChange={handlePageChange}
+              />
+            </div>
+          </>
         ) : (
-          <>{data?.map((task) => <Task key={task.id} data={task} />)}</>
+          <p>No tasks found.</p>
         )}
-        <div className="flex items-center justify-between gap-4 text-xs text-gray-600">
-          <p className="min-w-max">Showing 1-10 of 24 tasks</p>
-          <Pagination pageCount={3} page={1} onPageChange={() => {}} />
-        </div>
       </div>
     </div>
   )

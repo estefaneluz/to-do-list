@@ -1,29 +1,25 @@
 import { useQuery } from '@tanstack/react-query'
-import { Task } from '../../types/task'
+import { TaskList } from '../../types/task'
+import client from '@/api/clients'
 
-const mockTasks: Task[] = [
-  {
-    id: '1',
-    title: 'Update website content',
-    createdAt: new Date(),
-    createdBy: 'Teste',
-    status: 'done',
-    tags: [
-      { color: { name: 'red', hex: '#fff', rgb: '123' }, id: '1', name: 'Work' }
-    ],
-    updatedAt: new Date()
-  }
-]
-
-async function getAllTasks(): Promise<Task[]> {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(mockTasks), 2000)
-  })
+type Filters = {
+  search?: string
+  tags?: number[]
+  page: number
 }
 
-export function useGetTasks() {
+async function getAllTasks(params: Filters): Promise<TaskList> {
+  const { data } = await client.get('/tasks/', {
+    params
+  })
+
+  return data
+}
+
+export function useGetTasks({ search, tags, page }: Filters) {
   return useQuery({
     queryKey: ['ALL_TASKS'],
-    queryFn: getAllTasks
+    queryFn: () => getAllTasks({ search, tags, page }),
+    enabled: !!page
   })
 }

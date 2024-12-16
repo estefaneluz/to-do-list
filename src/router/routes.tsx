@@ -2,7 +2,7 @@ export type Module = 'all-tasks' | 'tags' | 'settings'
 import AllTasks from '@/pages/AllTasks'
 import SignIn from '@/pages/SignIn'
 import SignUp from '@/pages/SignUp'
-import { ListCheck, Settings, Tag } from 'lucide-react'
+import { ListCheck } from 'lucide-react'
 
 type Route = {
   path: string
@@ -26,19 +26,19 @@ export const PROTECTED_ROUTES = {
     name: 'All Tasks',
     icon: <ListCheck {...iconProps} />,
     element: <AllTasks />
-  },
-  tags: {
-    path: '/tags',
-    name: 'Tags',
-    icon: <Tag {...iconProps} />,
-    element: <></>
-  },
-  settings: {
-    path: '/settings',
-    name: 'Settings',
-    icon: <Settings {...iconProps} />,
-    element: <></>
   }
+  // tags: {
+  //   path: '/tags',
+  //   name: 'Tags',
+  //   icon: <Tag {...iconProps} />,
+  //   element: <></>
+  // },
+  // settings: {
+  //   path: '/settings',
+  //   name: 'Settings',
+  //   icon: <Settings {...iconProps} />,
+  //   element: <></>
+  // }
 } as Routes
 
 export const PUBLIC_ROUTES = {

@@ -5,11 +5,11 @@ import { DeleteTaskModal } from '../../../components/Task/DeleteTaskModal'
 import { UpdateTaskModal } from '../../../components/Task/UpdateTaskModal'
 import { type Task } from '../../../types/task'
 
-type TTaskProps = {
+type TaskProps = {
   data: Task
 }
 
-export function Task({ data }: TTaskProps) {
+export function Task({ data }: TaskProps) {
   return (
     <div className="flex cursor-pointer items-center gap-2 rounded-sm border bg-white p-4">
       <Checkbox />
