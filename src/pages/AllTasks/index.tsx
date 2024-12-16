@@ -10,7 +10,14 @@ import { useGetTags } from '@/hooks/queries/use-get-tags'
 
 const AllTasks = () => {
   const [page, setPage] = useState(1)
-  const { data: tasks, isLoading: tasksLoading } = useGetTasks({ page })
+  const [search, setSearch] = useState('')
+
+  const {
+    data: tasks,
+    isLoading: tasksLoading,
+    refetch: refetchTasks
+  } = useGetTasks({ search, page })
+
   const { data: tags } = useGetTags()
 
   const handlePageChange = (page: number) => {
@@ -42,15 +49,17 @@ const AllTasks = () => {
           type="text"
           placeholder="Search tasks..."
           className="bg-white py-5"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <Button type="submit" className="h-auto">
+        <Button onClick={() => refetchTasks()} type="button" className="h-auto">
           Search
         </Button>
       </div>
       <div className="flex flex-col gap-4">
         {tasksLoading ? (
           <h1> Loading... </h1>
-        ) : tasks ? (
+        ) : tasks?.results?.length ? (
           <>
             {tasks?.results?.map((task) => <Task key={task.id} data={task} />)}
 
@@ -66,7 +75,7 @@ const AllTasks = () => {
             </div>
           </>
         ) : (
-          <p>No tasks found.</p>
+          <p className="w-full text-center text-gray-600">No tasks found.</p>
         )}
       </div>
     </div>
