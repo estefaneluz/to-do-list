@@ -41,10 +41,8 @@ npm install
 Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
 
 ```bash
-VITE_API_URL = http://exemplo.com
+VITE_API_URL = http://localhost:8000
 ```
-
-e substitua a url pela url da API.
 
 ### 3. Rodar o Projeto
 
