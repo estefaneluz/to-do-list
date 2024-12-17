@@ -46,7 +46,7 @@ export function UpdateTaskModal({ task }: Props) {
     tags?.map((tag) => ({
       label: tag.name,
       value: tag.id,
-      color: tag.color
+      color: tag.hex_color
     })) ?? []
 
   const status_options = Object.values(TaskStatus).map((status) => ({
@@ -63,7 +63,7 @@ export function UpdateTaskModal({ task }: Props) {
       task.tags.map((tag) => ({
         label: tag.name,
         value: tag.id,
-        color: tag.color
+        color: tag.hex_color
       })) ?? []
   }
 
