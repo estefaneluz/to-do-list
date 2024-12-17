@@ -8,12 +8,14 @@ import {
   useCallback
 } from 'react'
 import { useNavigate } from 'react-router'
+import { useSignOut } from '@/hooks/queries/use-authentication'
 
 type AuthContext = {
   user: User
   setUser: React.Dispatch<React.SetStateAction<User>>
   signIn: (data: User) => void
   signOut: () => void
+  resetUser: () => void
 }
 
 type AuthProvider = { children: React.ReactNode }
@@ -22,7 +24,8 @@ const AuthContext = createContext<AuthContext>({
   user: {} as User,
   setUser: () => {},
   signIn: () => {},
-  signOut: () => {}
+  signOut: () => {},
+  resetUser: () => {}
 })
 
 export function AuthProvider({ children }: AuthProvider) {
@@ -38,6 +41,12 @@ function useProvideAuth() {
   const [user, setUser] = useState<User>({} as User)
 
   const navigate = useNavigate()
+  const { mutateAsync: signOutMutate } = useSignOut()
+
+  const resetUser = useCallback(() => {
+    setUser({} as User)
+    localStorage.clear()
+  }, [])
 
   const signIn = useCallback(
     (data: User) => {
@@ -50,24 +59,24 @@ function useProvideAuth() {
     [navigate]
   )
 
-  const signOut = useCallback(() => {
-    setUser({} as User)
-    localStorage.clear()
-  }, [])
+  const signOut = () => {
+    signOutMutate().finally(() => resetUser())
+  }
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user') as string)
     if (user) {
       signIn(user)
     } else {
-      signOut()
+      resetUser()
     }
-  }, [signIn, signOut])
+  }, [signIn, resetUser])
 
   return {
     user,
     setUser,
     signIn,
-    signOut
+    signOut,
+    resetUser
   }
 }

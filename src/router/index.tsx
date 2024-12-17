@@ -13,11 +13,11 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 }
 
 export const PublicRoute = ({ children }: { children: JSX.Element }) => {
-  const { signOut } = useAuth()
+  const { resetUser } = useAuth()
 
   useEffect(() => {
-    signOut()
-  }, [signOut])
+    resetUser()
+  }, [resetUser])
 
   return children
 }
