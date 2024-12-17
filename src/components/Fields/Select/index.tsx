@@ -22,9 +22,10 @@ export const Select = ({ label, ...props }: Props) => {
             ),
           option: () => clsx('p-2 hover:bg-secondary'),
           menu: () => clsx('-ml-2 mt-2 rounded-md border bg-white'),
+          indicatorsContainer: () => clsx('text-gray-500'),
           multiValue: () =>
             clsx(
-              'rounded-md border border-primary/60 bg-primary-foreground px-2 py-1'
+              'mr-2 flex items-center gap-2 rounded-md border border-gray-600/80 bg-primary-foreground px-2 py-1 text-gray-600'
             )
         }}
         {...props}

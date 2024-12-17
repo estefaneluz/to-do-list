@@ -118,6 +118,10 @@ export const useDeleteTask = () => {
     mutationFn: deleteTask,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['ALL_TASKS'] })
+      toast({
+        title: 'Success!',
+        description: 'You have successfully deleted a task.'
+      })
     },
     onError: () => {
       toast({

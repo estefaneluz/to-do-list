@@ -58,7 +58,11 @@ export function TaskOverviewModal({
 
             <div className="flex items-center gap-2">
               {task.tags.map((tag) => (
-                <Badge key={tag.id} className="max-w-max">
+                <Badge
+                  key={tag.id}
+                  variant="outline"
+                  style={{ borderColor: tag.hex_color, color: tag.hex_color }}
+                >
                   {tag.name}
                 </Badge>
               ))}

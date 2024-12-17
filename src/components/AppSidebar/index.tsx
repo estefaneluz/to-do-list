@@ -14,8 +14,8 @@ export function AppSidebar() {
   const { signOut } = useAuth()
 
   return (
-    <Sidebar className="top-[var(--header-height)]">
-      <SidebarHeader>
+    <Sidebar className="min-h-full grow">
+      <SidebarHeader className="mt-[var(--header-height)]">
         <User />
       </SidebarHeader>
       <SidebarContent className="my-2">

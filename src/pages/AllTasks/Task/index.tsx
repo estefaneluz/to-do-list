@@ -34,19 +34,19 @@ export function Task({ data }: TaskProps) {
       />
 
       <TaskOverviewModal triggerClassName="grow" task={data}>
-        <div className="flex items-center">
-          {data.title}
-          {data.tags.map((tag) => (
-            <Badge
-              key={tag.id}
-              className="ml-2 size-max border-primary bg-primary-foreground text-primary"
-              variant="outline"
-            >
-              {tag.name}
-            </Badge>
-          ))}
-        </div>
+        <div className="flex items-center">{data.title}</div>
       </TaskOverviewModal>
+
+      {data.tags.map((tag) => (
+        <Badge
+          key={tag.id}
+          style={{ borderColor: tag.hex_color, color: tag.hex_color }}
+          className="ml-2 size-max bg-primary-foreground text-primary"
+          variant="outline"
+        >
+          {tag.name}
+        </Badge>
+      ))}
 
       <div className=" flex items-center gap-2">
         <UpdateTaskModal task={data} />

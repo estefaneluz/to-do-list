@@ -60,7 +60,7 @@ const AllTasks = () => {
                     backgroundColor: isSelected
                       ? String(tag.hex_color)
                       : 'transparent',
-                    color: isSelected ? 'black' : String(tag.hex_color),
+                    color: isSelected ? '#fff' : String(tag.hex_color),
                     borderColor: String(tag.hex_color)
                   }}
                   className="cursor-pointer"

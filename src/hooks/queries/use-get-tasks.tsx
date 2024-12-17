@@ -21,7 +21,7 @@ async function getAllTasks(params: Filters): Promise<TaskList> {
 
 export function useGetTasks({ search, tags, page }: Filters) {
   return useQuery({
-    queryKey: ['ALL_TASKS', search, tags],
+    queryKey: ['ALL_TASKS', page, search, tags],
     queryFn: () => getAllTasks({ search, tags, page }),
     enabled: !!page
   })

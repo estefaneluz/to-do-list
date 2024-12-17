@@ -28,7 +28,10 @@ export function NewTagModal() {
   })
 
   const form = useForm({
-    resolver: yupResolver(NewTag)
+    resolver: yupResolver(NewTag),
+    defaultValues: {
+      hex_color: '#2563eb'
+    }
   })
 
   const { mutate: createTag, isPending: isCreating } = useCreateTag()
