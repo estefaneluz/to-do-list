@@ -1,5 +1,5 @@
 import { AppName } from '../AppName'
-import { NewTaskModal } from '../Task/NewTaskModal'
+import { NewTaskModal } from '../NewTaskModal'
 
 export function Header() {
   return (

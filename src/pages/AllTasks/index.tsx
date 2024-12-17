@@ -1,12 +1,12 @@
 import { Badge } from '@/components/ui/badge'
-import { Task } from './Task'
-import { Pagination } from './Pagination'
-import { NewTagModal } from './NewTagModal'
+import { TaskItem } from './components/Task/TaskItem'
+import { Pagination } from './components/Pagination'
+import { NewTagModal } from './components/NewTagModal'
 import { Input } from '../../components/ui/input'
 import { Button } from '../../components/ui/button'
-import { useGetTasks } from '../../hooks/queries/use-get-tasks'
 import { useState } from 'react'
-import { useGetTags } from '@/hooks/queries/use-get-tags'
+import { useGetTasks } from '@/hooks/queries/use-task'
+import { useGetTags } from '@/hooks/queries/use-tags'
 
 const AllTasks = () => {
   const [page, setPage] = useState(1)
@@ -91,7 +91,9 @@ const AllTasks = () => {
           <h1> Loading... </h1>
         ) : tasks?.results?.length ? (
           <>
-            {tasks?.results?.map((task) => <Task key={task.id} data={task} />)}
+            {tasks?.results?.map((task) => (
+              <TaskItem key={task.id} data={task} />
+            ))}
 
             <div className="flex items-center justify-between gap-4 text-xs text-gray-600">
               <p className="min-w-max">

@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import client from '@/api/clients'
 import { Tag } from '@/types/tag'
-import { toast } from '../use-toast'
+import { toast } from '@/hooks/globals/use-toast'
 
 async function getAllTags(): Promise<Tag[]> {
   const { data } = await client.get('/tags/')

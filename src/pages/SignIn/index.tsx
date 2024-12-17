@@ -39,9 +39,7 @@ const SignIn = () => {
       },
       {
         onSuccess(data) {
-          console.log(data)
           signIn(data)
-          console.log('??')
         },
         onError() {
           form.setError('password', {

@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/dialog'
 import { Form } from '@/components/ui/form'
 import { TaskStatus } from '@/enum/task-status'
-import { useGetTags } from '@/hooks/queries/use-get-tags'
+import { useGetTags } from '@/hooks/queries/use-tags'
 import { useUpdateTask } from '@/hooks/queries/use-task'
 import { Task } from '@/types/task'
 

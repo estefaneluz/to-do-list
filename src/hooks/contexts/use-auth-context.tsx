@@ -10,7 +10,7 @@ import {
 import { useNavigate } from 'react-router'
 import { useSignOut } from '@/hooks/queries/use-authentication'
 
-type AuthContext = {
+export type AuthContext = {
   user: User
   setUser: React.Dispatch<React.SetStateAction<User>>
   signIn: (data: User) => void
@@ -18,9 +18,7 @@ type AuthContext = {
   resetUser: () => void
 }
 
-type AuthProvider = { children: React.ReactNode }
-
-const AuthContext = createContext<AuthContext>({
+export const AuthContext = createContext<AuthContext>({
   user: {} as User,
   setUser: () => {},
   signIn: () => {},
@@ -28,16 +26,11 @@ const AuthContext = createContext<AuthContext>({
   resetUser: () => {}
 })
 
-export function AuthProvider({ children }: AuthProvider) {
-  const auth = useProvideAuth()
-  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
-}
-
 export const useAuth = () => {
   return useContext(AuthContext)
 }
 
-function useProvideAuth() {
+export function useProvideAuth() {
   const [user, setUser] = useState<User>({} as User)
 
   const navigate = useNavigate()

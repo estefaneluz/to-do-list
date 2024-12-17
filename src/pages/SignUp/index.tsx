@@ -9,7 +9,7 @@ import { AppName } from '@/components/AppName'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { AxiosError } from 'axios'
-import { useToast } from '@/hooks/use-toast'
+import { useToast } from '@/hooks/globals/use-toast'
 
 const SignUp = () => {
   const RegisterUser = yup.object({

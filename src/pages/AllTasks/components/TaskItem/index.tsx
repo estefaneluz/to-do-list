@@ -1,17 +1,17 @@
-import { TaskOverviewModal } from '@/components/Task/TaskOverviewModal'
+import { TaskOverviewModal } from '@/pages/AllTasks/components/Task/TaskOverviewModal'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
-import { DeleteTaskModal } from '../../../components/Task/DeleteTaskModal'
-import { UpdateTaskModal } from '../../../components/Task/UpdateTaskModal'
-import { type Task } from '../../../types/task'
+import { DeleteTaskModal } from '@/pages/AllTasks/components/Task/DeleteTaskModal'
+import { UpdateTaskModal } from '@/pages/AllTasks/components/Task/UpdateTaskModal'
 import { TaskStatus } from '@/enum/task-status'
 import { useUpdateStatus } from '@/hooks/queries/use-task'
+import { Task } from '@/types/task'
 
-type TaskProps = {
+type TaskItemProps = {
   data: Task
 }
 
-export function Task({ data }: TaskProps) {
+export function TaskItem({ data }: TaskItemProps) {
   const { mutate: updateStatus, isPending: isUpdating } = useUpdateStatus()
 
   const handleUpdateStatus = () => {
