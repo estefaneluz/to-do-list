@@ -2,6 +2,10 @@
 
 **Descrição do projeto:**
 
+Aplicação web para o gerenciamento de tarefas, construída com React (front-end) e Python (back-end).
+
+[Repositório back-end](https://github.com/estefaneluz/to-do-api)
+
 ---
 
 ## 📋 **Requisitos**
