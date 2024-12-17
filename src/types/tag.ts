@@ -1,11 +1,5 @@
 export type Tag = {
-  id: string
+  id: number
   name: string
-  color: Color
-}
-
-export type Color = {
-  name: string
-  hex: string
-  rgb: string
+  hex_color: string
 }

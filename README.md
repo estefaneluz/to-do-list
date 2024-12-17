@@ -1,60 +1,57 @@
-# To-Do List
+# 🚀 **Nome do Projeto**
 
-## What is inside?
+**Descrição do projeto:**
 
-This project uses many tools like:
+---
 
-- [Vite](https://vitejs.dev)
-- [ReactJS](https://reactjs.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Vitest](https://vitest.dev)
-- [Testing Library](https://testing-library.com)
-- [Tailwindcss](https://tailwindcss.com)
-- [Eslint](https://eslint.org)
-- [Prettier](https://prettier.io)
+## 📋 **Requisitos**
 
-## Getting Started
+Antes de começar, certifique-se de ter instalado em sua máquina:
 
-### Install
+- **Node.js**: versão 16 ou superior. [Download Node.js](https://nodejs.org/)
+- **npm** ou **yarn**: gerenciadores de pacotes do Node.
 
-Install dependencies.
+---
+
+## 🛠️ **Instalação e Configuração**
+
+### 1. **Clonar o Repositório**
+
+Abra o terminal e execute:
+
+```bash
+git clone git@github.com:estefaneluz/to-do-list.git
+cd to-do-list
+```
+
+### 2. **Instalar as Dependências**
+
+Para instalar todas as dependências do projeto, execute:
 
 ```bash
 npm install
 ```
 
-Serve with hot reload at <http://localhost:5173>.
+### 3. Configurar Variáveis de Ambiente
+
+Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
+
+```bash
+VITE_API_URL = http://exemplo.com
+```
+
+e substitua a url pela url da API.
+
+### 3. Rodar o Projeto
 
 ```bash
 npm run dev
 ```
 
-### Lint
+O projeto estará disponível em: http://localhost:5173/
 
-```bash
-npm run lint
-```
+### 🌟 Tecnologias Utilizadas
 
-### Typecheck
-
-```bash
-npm run typecheck
-```
-
-### Build
-
-```bash
-npm run build
-```
-
-### Test
-
-```bash
-npm run test
-```
-
-View and interact with your tests via UI.
-
-```bash
-npm run test:ui
-```
+- React: Framework principal.
+- Vite: Ferramenta de build.
+- Tailwind CSS: Estilização
