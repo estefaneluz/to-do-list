@@ -56,8 +56,14 @@ const AllTasks = () => {
               return (
                 <Badge
                   onClick={() => handleSelectTag(tag.id)}
+                  style={{
+                    backgroundColor: isSelected
+                      ? String(tag.hex_color)
+                      : 'transparent',
+                    color: isSelected ? 'black' : String(tag.hex_color),
+                    borderColor: String(tag.hex_color)
+                  }}
                   className="cursor-pointer"
-                  variant={isSelected ? 'default' : 'outline'}
                   key={tag.id}
                 >
                   {tag.name}
